@@ -12,17 +12,23 @@ const player1El = document.querySelector('.player--1');
 const bntHoldEl = document.querySelector('.btn--hold');
 const winner0EL = document.getElementById('winner--0');
 const winner1EL = document.getElementById('winner--1');
+let scores, currentScore, activePlayer;
 
-const scores = [0, 0];
-let currentScore = 0;
-let activePlayer = 0;
+initGame();
 
-//set initial values//
-score0El.textContent = 0;
-score1El.textContent = 0;
-diceEl.classList.add('hidden');
-winner0EL.classList.add('hidden');
-winner1EL.classList.add('hidden');
+function initGame() {
+  scores = [0, 0];
+  currentScore = 0;
+  activePlayer = 0;
+  //set initial values//
+  score0El.textContent = 0;
+  score1El.textContent = 0;
+  diceEl.classList.add('hidden');
+  winner0EL.classList.add('hidden');
+  winner1EL.classList.add('hidden');
+  current0El.textContent = 0;
+  current1El.textContent = 0;
+}
 
 //switch player
 function switchPlayer() {
@@ -58,7 +64,7 @@ bntHoldEl.addEventListener('click', function () {
   scores[activePlayer] += currentScore;
   document.getElementById(`score--${activePlayer}`).textContent =
     scores[activePlayer];
-  if (scores[activePlayer] >= 100) {
+  if (scores[activePlayer] >= 10) {
     document
       .querySelector(`.player--${activePlayer}`)
       .classList.add('player--winner');
@@ -77,9 +83,6 @@ bntHoldEl.addEventListener('click', function () {
 });
 //new game reset
 btnNewEl.addEventListener('click', function () {
-  diceEl.classList.add('hidden');
-  winner0EL.classList.add('hidden');
-  winner1EL.classList.add('hidden');
   document
     .querySelector(`.player--${activePlayer}`)
     .classList.remove('player--winner');
@@ -88,11 +91,5 @@ btnNewEl.addEventListener('click', function () {
     .classList.add('player--active');
   btnRoll.classList.remove('hidden');
   bntHoldEl.classList.remove('hidden');
-  document;
-  score0El.textContent = 0;
-  score1El.textContent = 0;
-  current0El.textContent = 0;
-  current1El.textContent = 0;
-  activePlayer = 0;
-  currentScore = 0;
+  initGame();
 });
